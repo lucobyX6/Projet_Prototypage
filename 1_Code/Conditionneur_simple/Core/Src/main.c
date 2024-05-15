@@ -48,9 +48,10 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 volatile uint32_t  clock_act;
 volatile uint32_t  clock_before =0;
-volatile uint32_t period =0;
+volatile uint32_t  period =0;
 volatile uint32_t  freq =0;
-volatile uint32_t  Capacity =0;
+volatile uint32_t  Capacity =2;
+volatile float temp;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -106,9 +107,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	 sprintf(msg_data,"Fréquence : %lu Hz | Capacité : %lu pF \n",freq, Capacity);
-	 HAL_UART_Transmit(&huart2, (uint8_t*) msg_data, strlen(msg_data), HAL_MAX_DELAY);
-	 HAL_Delay(1000);
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
   }
@@ -284,9 +282,13 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 		clock_act = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
 		period = clock_act - clock_before;
 		clock_before = clock_act;
-		freq = 1/period;
-		Capacity = 1/(freq*1000000);
+		temp = 1/(period*0.00000003125);
+		freq = temp;
+		Capacity = (1000000/freq);
 	}
+
+	 sprintf(msg_data,"Frequence : %lu Hz | Capacite : %lu pF \n\r",freq, Capacity);
+	 HAL_UART_Transmit(&huart2, (uint8_t*) msg_data, strlen(msg_data), HAL_MAX_DELAY);
 }
 /* USER CODE END 4 */
 
