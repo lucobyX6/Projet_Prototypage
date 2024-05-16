@@ -12,3 +12,5 @@ TO DO LIST :
 6. Réaliser le Code
 7. Tester l'ensemble
 8. Écrire le rapport
+
+Date de rendu : 5 juin
