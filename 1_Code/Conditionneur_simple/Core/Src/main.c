@@ -52,6 +52,7 @@ volatile uint32_t  period =0;
 volatile uint32_t  freq =0;
 volatile uint32_t  Capacity =2;
 volatile float temp;
+volatile int capture =0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -279,17 +280,26 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 	if (htim->Instance == TIM2 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1 )
 	{
-		clock_act = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
-		period = clock_act - clock_before;
-		clock_before = clock_act;
+		if(capture == 0)
+		{
+			clock_before = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+			capture =1;
+		}
+		else
+		{
+			clock_act = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+			period = clock_act - clock_before;
+			capture =0;
 
-		freq = 1/(period*0.00000003125);
-		freq = temp;
-		Capacity = (1000000/freq);
+			temp = HAL_RCC_GetPCLK1Freq()/period;
+			freq = temp;
+			Capacity = (1000000/freq);
+
+			sprintf(msg_data,"Frequence : %lu Hz | Capacite : %lu pF \n\r",freq, Capacity);
+			HAL_UART_Transmit(&huart2, (uint8_t*) msg_data, strlen(msg_data), HAL_MAX_DELAY);
+		}
+
 	}
-
-	sprintf(msg_data,"Frequence : %lu Hz | Capacite : %lu pF \n\r",freq, Capacity);
-	HAL_UART_Transmit(&huart2, (uint8_t*) msg_data, strlen(msg_data), HAL_MAX_DELAY);
 }
 /* USER CODE END 4 */
 
