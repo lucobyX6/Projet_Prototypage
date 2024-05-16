@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,7 +46,12 @@ TIM_HandleTypeDef htim2;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+volatile uint32_t  clock_act;
+volatile uint32_t  clock_before =0;
+volatile uint32_t  period =0;
+volatile uint32_t  freq =0;
+volatile uint32_t  Capacity =2;
+volatile float temp;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -59,7 +65,7 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+char msg_data[100];
 /* USER CODE END 0 */
 
 /**
@@ -94,7 +100,7 @@ int main(void)
   MX_TIM2_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_TIM_IC_Start_IT(&htim2, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -102,7 +108,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -269,7 +274,23 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+	HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+	if (htim->Instance == TIM2 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1 )
+	{
+		clock_act = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+		period = clock_act - clock_before;
+		clock_before = clock_act;
 
+		freq = 1/(period*0.00000003125);
+		freq = temp;
+		Capacity = (1000000/freq);
+	}
+
+	sprintf(msg_data,"Frequence : %lu Hz | Capacite : %lu pF \n\r",freq, Capacity);
+	HAL_UART_Transmit(&huart2, (uint8_t*) msg_data, strlen(msg_data), HAL_MAX_DELAY);
+}
 /* USER CODE END 4 */
 
 /**
