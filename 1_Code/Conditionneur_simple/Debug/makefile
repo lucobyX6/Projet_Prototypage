@@ -61,7 +61,7 @@ main-build: Projet_Proto_1.elf secondary-outputs
 
 # Tool invocations
 Projet_Proto_1.elf Projet_Proto_1.map: $(OBJS) $(USER_OBJS) C:\1_Travail\3_ISMIN\1A_ISMIN\1_Cours\ISMIN_S6\5_Conception_des_Systemes_Electroniques\3_Projet_Prototypage\3_Projet\Projet_Prototypage\1_Code\Conditionneur_simple\STM32F301K8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Projet_Proto_1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\1_Travail\3_ISMIN\1A_ISMIN\1_Cours\ISMIN_S6\5_Conception_des_Systemes_Electroniques\3_Projet_Prototypage\3_Projet\Projet_Prototypage\1_Code\Conditionneur_simple\STM32F301K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Projet_Proto_1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "Projet_Proto_1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\1_Travail\3_ISMIN\1A_ISMIN\1_Cours\ISMIN_S6\5_Conception_des_Systemes_Electroniques\3_Projet_Prototypage\3_Projet\Projet_Prototypage\1_Code\Conditionneur_simple\STM32F301K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Projet_Proto_1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
