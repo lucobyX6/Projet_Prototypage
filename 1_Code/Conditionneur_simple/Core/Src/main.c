@@ -282,13 +282,14 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 		clock_act = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
 		period = clock_act - clock_before;
 		clock_before = clock_act;
-		temp = 1/(period*0.00000003125);
+
+		freq = 1/(period*0.00000003125);
 		freq = temp;
 		Capacity = (1000000/freq);
 	}
 
-	 sprintf(msg_data,"Frequence : %lu Hz | Capacite : %lu pF \n\r",freq, Capacity);
-	 HAL_UART_Transmit(&huart2, (uint8_t*) msg_data, strlen(msg_data), HAL_MAX_DELAY);
+	sprintf(msg_data,"Frequence : %lu Hz | Capacite : %lu pF \n\r",freq, Capacity);
+	HAL_UART_Transmit(&huart2, (uint8_t*) msg_data, strlen(msg_data), HAL_MAX_DELAY);
 }
 /* USER CODE END 4 */
 
