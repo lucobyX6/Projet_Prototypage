@@ -4,7 +4,7 @@ Projet de prototypage avec électrode capacitive - 1A - PICHOT Thomas | VINCENT 
 TO DO LIST : 
 
 0. Décrire le fonctionnement du système
-1. Concevoir le Pinout
+1. Concevoir le Pinout <--
 2. Réaliser le montage
 3. Concevoir le support plastique
 4. Imprimer le support plastique
