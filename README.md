@@ -4,13 +4,12 @@ Projet de prototypage avec électrode capacitive - 1A - PICHOT Thomas | VINCENT 
 TO DO LIST : 
 
 0. Décrire le fonctionnement du système
-1. Concevoir le Pinout
-2. Concevoir le conditionneur tripple
-3. Réaliser le montage
-4. Concevoir le support plastique
-5. Imprimer le support plastique
-6. Réaliser le Code
-7. Tester l'ensemble
-8. Écrire le rapport
+1. Concevoir le Pinout <--
+2. Réaliser le montage
+3. Concevoir le support plastique
+4. Imprimer le support plastique
+5. Réaliser le Code
+6. Tester l'ensemble
+7. Écrire le rapport
 
 Date de rendu : 5 juin
