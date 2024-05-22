@@ -1,35 +1,34 @@
 # PINOUT
 
-PA0 : 
-PA1 : 
-PA2 : 
-PA3 : 
-PA4 : 
-PA5 : 
-PA6 : 
-PA7 : 
+PA0 (A0) : 
+PA1 (A1) : 
+PA3 (A2) : 
+PA4 (A3) : 
+PA5 (A4) : 
+PA6 (A5) : 
+PA7 (A6) : 
+PA2 (A7) : 
 
-PD0/RX : 
-PD1/TX : 
-PD2 : 
-PD3 : 
-PD4 : 
-PD5 : 
-PD6 : 
-PD7 : 
-PD8 : 
-PD9 : 
-PD10 : 
-PD11 : 
-PD12 :
-PD13 : 
+PA10 (D0/RX) : 
+PA9 (D1/TX) : 
+PA12 (D2) : 
+PB0 (D3) : 
+PB7 (D4) : 
+PB6 (D5) : 
+PB1 (D6) : 
+PF0 (D7) : 
+PF1 (D8) : 
+PA8 (D9) : 
+PA11 (D10) : 
+PB5 (D11) : 
+PB4 (D12) :
+PB3 (D13) : 
 
-P5V : 
-P3V3 : 
-PVIN : 
-PRST :
-PGND : 
-PGND : 
-PREF : 
-
-
++5V (5V) : 
++3V3 (3V3) : 
+VIN (VIN) : 
+NRST (RST) : 
+NRST (RST) :
+GND (GND) : 
+GND (GND) : 
+AREF (REF) :
